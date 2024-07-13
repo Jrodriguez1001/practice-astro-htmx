@@ -1,0 +1,8 @@
+---
+let items: [] = [];
+import Item from "../../components/List.astro";
+---
+
+<ul>
+  {items.map((item) => <Item name={item} />)}
+</ul>

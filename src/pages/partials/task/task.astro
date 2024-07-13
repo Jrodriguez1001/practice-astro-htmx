@@ -1,0 +1,67 @@
+---
+//@ts-ignore
+import fs from "node:fs/promises";
+//@ts-ignore
+import path from "node:path";
+
+const filePath = path.resolve("./data/list.json");
+const dirPath = path.dirname(filePath);
+
+async function directoryExists(): Promise<void> {
+  try {
+    await fs.mkdir(dirPath, { recursive: true });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getList(): Promise<string[]> {
+  try {
+    const data = await fs.readFile(filePath, "utf8");
+    return JSON.parse(data) as string[];
+  } catch (error: any) {
+    if (error.code === "ENOENT") {
+      await saveList([]);
+      return [];
+    } else {
+      throw error;
+    }
+  }
+}
+
+async function saveList(list: string[]): Promise<void> {
+  const data = JSON.stringify(list, null, 2);
+  await fs.writeFile(filePath, data, "utf8");
+}
+
+async function handlePostRequest() {
+  const form = await Astro.request.formData();
+  const value = form.get("todo") as string;
+
+  if (value) {
+    let list = await getList();
+    list.push(value);
+    await saveList(list);
+  }
+
+  return await getList();
+}
+
+async function handleGetRequest() {
+  return await getList();
+}
+
+await directoryExists();
+
+let list: string[];
+
+if (Astro.request.method === "POST") {
+  list = await handlePostRequest();
+} else {
+  list = await handleGetRequest();
+}
+---
+
+<ul>
+  {{list.map((item) => <li key={item}>{item}</li>)}}
+</ul>

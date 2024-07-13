@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <!-- <h1>Hola!</h1>
+  <button hx-get="/partials/task/task" hx-trigger="click" hx-target="#list"
+    >Cargar lista</button
+  >
+  <ul id="list"></ul><form> -->
+  <form>
+    <input
+      type="text"
+      name="todo"
+      class="add-task"
+      placeholder="Add a new todo"
+    />
+    <button hx-post="/partials/task/task-server" type="submit" hx-target="#list"
+      >Add</button
+    >
+    <h1>Lista de Tareas</h1>
+    <div id="list" hx-get="/partials/task/task-server" hx-trigger="load"></div>
+  </form>
+</BaseLayout>

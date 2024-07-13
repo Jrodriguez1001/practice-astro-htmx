@@ -1,0 +1,22 @@
+---
+type Props = {
+  cards: Card[];
+};
+type Card = {
+  name: string;
+};
+
+const { cards } = Astro.props;
+---
+
+<div class="card">
+  {cards.map((card: Card) => <p>{card.name}</p>)}
+</div>
+
+<style>
+  .card {
+    width: 200px;
+    height: 100px;
+    border: 1px solid red;
+  }
+</style>

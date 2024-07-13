@@ -1,0 +1,42 @@
+---
+async function getList(): Promise<string[]> {
+  try {
+    const data = await fetch("http://localhost:3000/tasks");
+    const response = await data.json();
+    return response;
+  } catch (error: any) {
+    console.error(error);
+  }
+}
+
+async function handleGetRequest() {
+  return await getList();
+}
+
+async function handlePostRequest() {
+  const form = await Astro.request.formData();
+  const value = form.get("todo") as string;
+
+  //send to the server
+  await fetch("http://localhost:3000/tasks", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id: 20, title: value }),
+  });
+  return await getList();
+}
+
+let list: string[];
+
+if (Astro.request.method === "POST") {
+  list = await handlePostRequest();
+} else {
+  list = await handleGetRequest();
+}
+---
+
+<ul>
+  {list.map((item) => <li key={item.id}>{item.title}</li>)}
+</ul>

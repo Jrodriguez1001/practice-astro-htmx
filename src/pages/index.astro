@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <h1>Hola!</h1>
+  <button hx-get="/partials/list" hx-trigger="click" hx-target="#list"
+    >Cargar lista</button
+  >
+  <ul id="list"></ul>
+</BaseLayout>

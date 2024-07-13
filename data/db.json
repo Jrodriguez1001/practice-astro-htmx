@@ -1,0 +1,49 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    },
+    {
+      "id": 20,
+      "title": "s"
+    },
+    {
+      "id": 20,
+      "title": "d"
+    },
+    {
+      "id": 20,
+      "title": "fw"
+    },
+    {
+      "id": 20,
+      "title": "fwww"
+    },
+    {
+      "id": 20,
+      "title": "scas"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
